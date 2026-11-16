@@ -2,7 +2,7 @@
 
 GitHub Pages로 공개하는 개인 CV 사이트입니다. 빌드나 설치 없이 `index.html` 하나로 동작합니다.
 
-- 주소: https://dana4832.github.io/danote.github.io/
+- 주소: https://dana4832.github.io/
 - 언어: 영어 / 한국어 (오른쪽 위 버튼으로 전환)
 
 ## 파일
