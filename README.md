@@ -13,6 +13,17 @@ GitHub Pages로 공개하는 개인 CV 사이트입니다. 빌드나 설치 없�
 | `assets/style.css` | 디자인 (맨 위 `:root` 변수에서 색상 변경) |
 | `assets/main.js` | 언어 전환, PDF 저장 버튼, 메뉴 강조 |
 | `assets/favicon.svg` | 브라우저 탭 아이콘 |
+| `talks.html` | 발표 사진 페이지 (CV 05번 "발표 사진 보기"에서 연결) |
+| `assets/gallery.js` | 사진을 눌렀을 때 크게 보기 |
+| `assets/talks-web/` | 사이트에 올라가는 발표 사진 (웹용 크기) |
+| `tools/resize_photos.py` | 원본 사진을 웹용 크기로 줄이는 도구 |
+
+## 발표 사진 추가
+
+1. 원본 사진을 `assets/talks/<날짜 폴더>/` 에 넣습니다. (예: `assets/talks/2026 1031/`)
+   이 폴더는 내 컴퓨터에만 있고 GitHub에는 올라가지 않습니다.
+2. `python tools/resize_photos.py talks` 를 실행하면 `assets/talks-web/` 에 줄인 사진이 만들어집니다.
+3. `talks.html` 에서 해당 발표의 `<div class="shots">` 안에 `<figure>` 를 추가합니다.
 
 ## 내용 수정
 

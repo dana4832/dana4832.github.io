@@ -361,6 +361,105 @@ main { padding: 8px 0 40px; }
 .skills dt { font-weight: 600; font-size: 15px; }
 .skills dd { margin: 0; color: var(--muted); font-size: 15px; }
 
+/* ---------- 사진 페이지 (발표 사진 등) ---------- */
+.hero.sub .hero-copy { padding: 52px 0 38px; }
+.hero.sub h1 { font-size: clamp(36px, 5vw, 52px); }
+
+/* CV에서 사진 페이지로 가는 링크 */
+.photo-link { margin: 0 0 24px !important; }
+.photo-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 500 14px var(--sans);
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--leaf-deep);
+  text-decoration: none;
+}
+.photo-link a:hover { border-color: var(--leaf); }
+.photo-link svg { width: 15px; height: 15px; flex: none; }
+
+.talk { padding-bottom: 44px; scroll-margin-top: 84px; }
+.talk:last-child { padding-bottom: 0; }
+.talk .when { margin-bottom: 4px !important; }
+.talk h3 { font: 500 19px/1.4 var(--serif); margin: 0 0 4px; }
+.talk .tags { margin-top: 8px; }
+
+.shots {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.shots figure { grid-column: span 2; margin: 0; min-width: 0; }
+.shots.n1 figure { grid-column: span 4; }
+.shots.n2 figure,
+.shots.n4 figure,
+.shots.n5 figure:nth-child(-n+2) { grid-column: span 3; }
+.shots a {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--mint);
+  cursor: zoom-in;
+}
+.shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+.shots a:hover img { transform: scale(1.03); }
+.shots figcaption { font-size: 12.5px; color: var(--muted); margin-top: 5px; }
+
+/* 크게 보기 */
+.lightbox {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+}
+.lightbox[open] { display: grid; place-items: center; }
+.lightbox::backdrop { background: rgba(8, 18, 13, 0.9); }
+.lightbox figure { margin: 0; text-align: center; }
+.lightbox img {
+  display: block;
+  max-width: min(92vw, 1400px);
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.lightbox figcaption { font-size: 14px; margin-top: 12px; color: #dfe9df; }
+.lb-btn {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: 400 26px/1 var(--sans);
+  cursor: pointer;
+}
+.lb-btn:hover { background: rgba(255, 255, 255, 0.28); }
+.lb-btn:focus-visible { outline-color: #fff; }
+.lb-close { top: 16px; right: 16px; }
+.lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+
 /* ---------- 하단 ---------- */
 footer {
   border-top: 1.5px solid var(--leaf-deep);
@@ -386,10 +485,20 @@ footer p { margin: 0; }
   .cards { grid-template-columns: 1fr; }
   .skills { grid-template-columns: 1fr; gap: 2px; }
   .skills dd { margin-bottom: 12px; }
+  .shots { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .shots figure,
+  .shots.n2 figure,
+  .shots.n4 figure,
+  .shots.n5 figure:nth-child(-n+2) { grid-column: span 1; }
+  .shots.n1 figure,
+  .shots.n3 figure:first-child,
+  .shots.n5 figure:first-child { grid-column: span 2; }
+  .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .shots img { transition: none; }
 }
 
 /* ---------- 인쇄 (PDF로 저장하면 그대로 CV가 됩니다) ---------- */
