@@ -2,12 +2,12 @@
 <!-- 영어/한국어 두 가지로 작성합니다. data-l="en" 은 영어, data-l="ko" 는 한국어 화면에서만 보입니다. -->
 <html lang="en" data-lang="en"
       data-title-en="Daeun Lee — Curriculum Vitae"
-      data-title-ko="Daeun Lee — 이력서">
+      data-title-ko="이다은 — 이력서">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Daeun Lee — Curriculum Vitae</title>
-  <meta name="description" content="Daeun Lee — Ph.D. student at the Smart Urban Design Lab (SUDL), Chung-Ang University. Research on greener, healthier cities.">
+  <meta name="description" content="Daeun Lee — Ph.D. student at the Smart Urban Design Lab (SUDL), Chung-Ang University. Research on urban green space, heat, and air quality for greener, healthier cities.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,14 +28,14 @@
   <nav class="wrap" aria-label="Main navigation">
     <a class="brand" href="#home">
       <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1c5.5 4.5 5.5 11 0 15c-5.5-4-5.5-10.500 0-15Z"/><path d="M9.300 12h1.400v7H9.300z"/></svg>
-      <span>Daeun Lee</span>
+      <span><span data-l="en">Daeun Lee</span><span data-l="ko">이다은</span></span>
     </a>
     <div class="links">
       <a href="#about"><span data-l="en">About</span><span data-l="ko">소개</span></a>
       <a href="#education"><span data-l="en">Education</span><span data-l="ko">학력</span></a>
       <a href="#experience"><span data-l="en">Experience</span><span data-l="ko">경력</span></a>
       <a href="#publications"><span data-l="en">Publications</span><span data-l="ko">논문</span></a>
-      <a href="#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a>
+      <a href="#awards"><span data-l="en">Awards</span><span data-l="ko">수상</span></a>
       <a href="#skills"><span data-l="en">Skills</span><span data-l="ko">기술</span></a>
     </div>
     <div class="lang" role="group" aria-label="Language">
@@ -49,8 +49,7 @@
   <div class="wrap">
     <div class="hero-copy">
       <span class="eyebrow">Curriculum Vitae</span>
-      <!-- EDIT: 한국어 이름을 함께 쓰려면 <h1> 안에 <small>홍길동</small> 을 추가하세요 -->
-      <h1 id="name">Daeun Lee</h1>
+      <h1 id="name"><span data-l="en">Daeun Lee <small lang="ko">이다은</small></span><span data-l="ko">이다은 <small lang="en">Daeun Lee</small></span></h1>
       <p class="role">
         <span data-l="en">Ph.D. Student · Smart Urban Design Lab (SUDL), Chung-Ang University</span>
         <span data-l="ko">박사과정 · 중앙대학교 스마트도시설계연구실(SUDL)</span>
@@ -61,7 +60,7 @@
       </p>
       <ul class="contacts">
         <!-- EDIT: 공개할 이메일 주소 -->
-        <li><a href="mailto:ldaeun4832@gmail.com"><svg class="ic-line" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="m2 4.5 6 4.5 6-4.5"/></svg>Email</a></li>
+        <li><a href="mailto:ldaeun4832@cau.ac.kr"><svg class="ic-line" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="m2 4.5 6 4.5 6-4.5"/></svg>Email</a></li>
         <li><a href="https://github.com/dana4832" rel="me"><svg class="ic-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/daeun-lee-d4832" rel="me"><svg class="ic-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 5.9H1.2V14h2.4V5.900ZM2.4 2a1.4 1.4 0 1 0 0 2.8A1.4 1.4 0 0 0 2.4 2ZM14.8 14h-2.4V9.900c0-1.1-.5-1.8-1.4-1.8-1 0-1.6.7-1.6 1.8V14H7V5.900h2.3V7c.4-.7 1.3-1.3 2.5-1.3 1.9 0 3 1.2 3 3.4V14Z"/></svg>LinkedIn</a></li>
         <li><a href="https://smartud.cau.ac.kr/"><svg class="ic-line" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.500v-8h5v8M7.500 13.500v-11h6v11M1.500 13.500h13M4.500 8h1M4.500 10.500h1M10 5.500h1M10 8h1M10 10.500h1"/></svg><span data-l="en">Lab</span><span data-l="ko">연구실</span></a></li>
@@ -133,15 +132,15 @@
     <h2 id="about-t"><span class="num">01</span><span data-l="en">About</span><span data-l="ko">소개</span></h2>
     <div class="sec-body">
       <p data-l="en">My interest in plants has gradually led me to study cities — how urban environments interact with nature and how we can design greener, healthier cities for the future.</p>
-      <p data-l="en">I am a Ph.D. student at the Smart Urban Design Lab (SUDL) at Chung-Ang University in Seoul, with a background in both plant science and urban design. My work so far has used CFD simulation and machine learning to examine how fine particulate matter disperses in high-density urban areas, and mixed methods to understand how older adults use and experience urban parks.</p>
+      <p data-l="en">I am a Ph.D. student at the Smart Urban Design Lab (SUDL) at Chung-Ang University in Seoul, advised by Prof. Jeongwoo Lee, with a background in both plant science and urban design. My master's thesis examined how urban green space patterns and neighborhood types interact to shape land surface temperature in Seoul. I have also used CFD simulation and machine learning to study how fine particulate matter disperses in high-density urban areas, and contributed to mixed-methods research on how older adults use and experience urban parks.</p>
       <p data-l="ko">식물에 대한 관심에서 출발해 자연스럽게 도시를 연구하게 되었습니다. 도시 환경과 자연이 어떻게 상호작용하는지, 그리고 더 푸르고 건강한 미래 도시를 어떻게 설계할 수 있는지에 관심이 있습니다.</p>
-      <p data-l="ko">현재 중앙대학교 스마트도시설계연구실(SUDL) 박사과정에 재학 중이며, 식물생명공학과 도시설계를 함께 전공했습니다. 지금까지 CFD 시뮬레이션과 머신러닝으로 고밀 도시 지역의 미세먼지 확산 특성을 분석했고, 혼합 연구 방법으로 고령자의 도시공원 이용 행태와 경험을 연구했습니다.</p>
+      <p data-l="ko">현재 중앙대학교 스마트도시설계연구실(SUDL)에서 이정우 교수님의 지도로 박사과정에 재학 중이며, 식물생명공학과 도시설계를 함께 전공했습니다. 석사 학위논문에서는 서울시를 대상으로 도시 녹지 공간 패턴과 근린 유형이 지표면온도에 미치는 상호작용 효과를 분석했습니다. 또한 CFD 시뮬레이션과 머신러닝으로 고밀 도시 지역의 미세먼지 확산 특성을 연구했고, 고령자의 도시공원 이용 행태와 경험에 관한 혼합 방법 연구에 참여했습니다.</p>
       <p class="subhead"><span data-l="en">Research interests</span><span data-l="ko">연구 관심 분야</span></p>
-      <!-- EDIT: 관심 분야 -->
       <ul class="tags">
         <li data-l="en">Urban green space</li><li data-l="ko">도시 녹지</li>
-        <li data-l="en">Healthy cities</li><li data-l="ko">건강도시</li>
+        <li data-l="en">Urban heat · land surface temperature</li><li data-l="ko">도시 열환경 · 지표면온도</li>
         <li data-l="en">Urban air quality · PM</li><li data-l="ko">도시 대기질 · 미세먼지</li>
+        <li data-l="en">Healthy cities</li><li data-l="ko">건강도시</li>
         <li data-l="en">CFD simulation</li><li data-l="ko">CFD 시뮬레이션</li>
         <li data-l="en">Machine learning</li><li data-l="ko">머신러닝</li>
         <li data-l="en">GIS</li><li data-l="ko">GIS</li>
@@ -154,20 +153,20 @@
     <h2 id="edu-t"><span class="num">02</span><span data-l="en">Education</span><span data-l="ko">학력</span></h2>
     <div class="sec-body">
       <article class="entry">
-        <!-- EDIT: 박사과정 시작 시기와 학과명을 확인해 주세요 -->
-        <p class="when">2026 – <span data-l="en">Present</span><span data-l="ko">현재</span></p>
+        <p class="when">2026.03 – <span data-l="en">Present</span><span data-l="ko">현재</span></p>
         <div>
           <h3><span data-l="en">Ph.D. Student</span><span data-l="ko">박사과정</span></h3>
-          <p class="where"><span data-l="en">Chung-Ang University, Seoul</span><span data-l="ko">중앙대학교</span></p>
-          <p class="desc"><span data-l="en">Smart Urban Design Lab (SUDL)</span><span data-l="ko">스마트도시설계연구실(SUDL)</span></p>
+          <p class="where"><span data-l="en">Chung-Ang University · Smart Urban Design Lab (SUDL)</span><span data-l="ko">중앙대학교 · 스마트도시설계연구실(SUDL)</span></p>
+          <p class="desc"><span data-l="en">Advisor: Prof. Jeongwoo Lee</span><span data-l="ko">지도교수: 이정우 교수</span></p>
+          <p class="desc"><span data-l="en">Research area: Urban design strategy based on environmental performance</span><span data-l="ko">연구 분야: 환경 성능 기반 도시설계 전략</span></p>
         </div>
       </article>
       <article class="entry">
         <p class="when">2024.03 – 2026.02</p>
         <div>
-          <h3><span data-l="en">M.Eng. in Civil Engineering</span><span data-l="ko">공학석사 · 토목공학</span></h3>
+          <h3><span data-l="en">M.Eng. in Civil Engineering (Urban Engineering)</span><span data-l="ko">공학석사 · 토목공학 (도시공학 전공)</span></h3>
           <p class="where"><span data-l="en">Chung-Ang University, Seoul</span><span data-l="ko">중앙대학교</span></p>
-          <p class="desc"><span data-l="en">Major in Urban Engineering</span><span data-l="ko">도시공학 전공</span></p>
+          <p class="desc"><span data-l="en">Thesis: Analyzing the Interaction Effects Between Urban Green Space Patterns and Neighborhood Types in Land Surface Temperature Change</span><span data-l="ko">학위논문: 도시 녹지 공간 패턴에 따른 지표면온도 변화와 근린 유형의 상호작용 효과 분석</span></p>
         </div>
       </article>
       <article class="entry">
@@ -181,7 +180,7 @@
         <p class="when">2019.03 – 2024.02</p>
         <div>
           <h3><span data-l="en">B.S. in Agriculture, Plant Science and Technology</span><span data-l="ko">농학사 · 식물생명공학</span></h3>
-          <p class="where"><span data-l="en">Chung-Ang University</span><span data-l="ko">중앙대학교</span></p>
+          <p class="where"><span data-l="en">Chung-Ang University, Seoul</span><span data-l="ko">중앙대학교</span></p>
         </div>
       </article>
     </div>
@@ -195,7 +194,7 @@
         <p class="when">2024.03 – <span data-l="en">Present</span><span data-l="ko">현재</span></p>
         <div>
           <h3><span data-l="en">Research Assistant</span><span data-l="ko">연구조교</span></h3>
-          <p class="where"><span data-l="en">Chung-Ang University · Seoul, South Korea</span><span data-l="ko">중앙대학교 · 서울</span></p>
+          <p class="where"><span data-l="en">Smart Urban Design Lab (SUDL), Chung-Ang University · Seoul</span><span data-l="ko">중앙대학교 스마트도시설계연구실(SUDL) · 서울</span></p>
           <!-- EDIT: 수행한 연구·과제를 아래처럼 추가할 수 있습니다
           <ul class="points">
             <li><span data-l="en">…</span><span data-l="ko">…</span></li>
@@ -209,44 +208,142 @@
   <section class="sec" id="publications" aria-labelledby="pub-t">
     <h2 id="pub-t"><span class="num">04</span><span data-l="en">Publications</span><span data-l="ko">논문</span></h2>
     <div class="sec-body">
-      <!-- EDIT: 각 논문에 저자·학술지·연도·링크를 추가하세요. 예:
-           <p class="authors"><strong>Daeun Lee</strong>, 공저자</p>
-           <p class="venue">학술지명, 권(호), 쪽, 연도</p>
-           <p class="pub-links"><a href="https://doi.org/...">DOI</a></p> -->
-      <ol class="pubs plain">
+      <p class="subhead"><span data-l="en">Journal articles</span><span data-l="ko">학술지 논문</span></p>
+      <ol class="pubs">
         <li>
+          <p class="when">2025.05</p>
           <div>
-            <h3>Analyzing Dispersion Characteristics of Fine Particulate Matter in High-Density Urban Areas: A Study Using CFD Simulation and Machine Learning</h3>
+            <h3 lang="ko">고령자의 공원 이용 행태 및 경험 분석을 위한 혼합 방법 연구 — 성남시 판교(분당)의 신설 및 기존 공원을 중심으로</h3>
+            <p class="authors"><span data-l="en">Kitae Park, Yesong Shin, <strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko">박기태, 신예송, <strong>이다은</strong>, 이정우</span></p>
+            <p class="venue"><span data-l="en">GRI Review (GRI연구논총) · in Korean</span><span data-l="ko">GRI연구논총</span></p>
+            <p class="pub-links"><a href="https://doi.org/10.23286/gri.2025.27.2.007">DOI</a></p>
           </div>
         </li>
         <li>
+          <p class="when">2025.03</p>
           <div>
-            <h3 lang="ko">고령자의 공원 이용 행태 및 경험 분석을 위한 혼합 방법 연구 — 성남시 판교(분당)의 신설 및 기존 공원을 중심으로</h3>
-            <p class="venue" data-l="en">In Korean</p>
+            <h3>Analyzing Dispersion Characteristics of Fine Particulate Matter in High-Density Urban Areas: A Study Using CFD Simulation and Machine Learning</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Caryl Anne M. Barquilla, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, Caryl Anne M. Barquilla, 이정우</span></p>
+            <p class="venue">Land, 14(3), 632</p>
+            <p class="pub-links"><a href="https://doi.org/10.3390/land14030632">DOI</a></p>
+          </div>
+        </li>
+      </ol>
+      <p class="subhead"><span data-l="en">Conference presentations</span><span data-l="ko">학술대회 발표</span></p>
+      <ol class="pubs compact">
+        <li>
+          <p class="when">2026.08.20</p>
+          <div>
+            <h3>Differentiated Cooling Effects of Urban Green Space Patterns Across Neighborhood Types: Evidence from Seoul</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2026.05.22</p>
+          <div>
+            <h3 lang="ko">스트리트뷰이미지 기반 가시환경 지표와 도시형상이 도시열환경에 미치는 영향: 서울시 격자기반 분석</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue"><span data-l="en">Urban Health Society of Korea (도시건강학회) Conference, Seoul National University · in Korean</span><span data-l="ko">도시건강학회, 서울대학교 행정대학원</span></p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2025.08.21</p>
+          <div>
+            <h3>The Influence of Green Space Landscape Patterns on Land Surface Temperatures – A Spatial Analysis of Seoul</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2025.04.25</p>
+          <div>
+            <h3 lang="ko">도시 내 공원의 고령친화적 기능과 개선 방향: 굿모닝파크 사례 연구</h3>
+            <p class="authors"><span data-l="en">Kitae Park, Yesong Shin, <strong>Daeun Lee</strong> (presenter), Jeongwoo Lee</span><span data-l="ko">박기태, 신예송, <strong>이다은</strong>(발표), 이정우</span></p>
+            <p class="venue"><span data-l="en">Korea Planning Association Spring Industry–Academia Conference, Hanyang University · in Korean</span><span data-l="ko">대한국토·도시계획학회 춘계산학학술대회, 한양대학교</span></p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2024.10.12</p>
+          <div>
+            <h3 lang="ko">고밀도 도시공간구조에 따른 미세먼지 분산 특성 연구 — CFD 시뮬레이션과 머신러닝을 활용하여</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue"><span data-l="en">Urban Design Institute of Korea Fall Conference, Kangwon National University · in Korean</span><span data-l="ko">한국도시설계학회 추계학술대회, 강원대학교</span></p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2024.08.23</p>
+          <div>
+            <h3>Design Strategies for Minimizing Fine Particulate Matter in Urban Centers Using CFD Simulation</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+          </div>
+        </li>
+        <li>
+          <p class="when">2024.04.20</p>
+          <div>
+            <h3 lang="ko">CFD 시뮬레이션을 활용한 도로 및 건물 형상에 따른 미세먼지 분포 특성 연구</h3>
+            <p class="authors"><span data-l="en"><strong>Daeun Lee</strong>, Jeongwoo Lee</span><span data-l="ko"><strong>이다은</strong>, 이정우</span></p>
+            <p class="venue"><span data-l="en">Urban Design Institute of Korea Spring Conference, Hanyang University · in Korean</span><span data-l="ko">한국도시설계학회 춘계학술대회, 한양대학교</span></p>
           </div>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- 05 프로젝트 -->
-  <section class="sec" id="projects" aria-labelledby="proj-t">
-    <h2 id="proj-t"><span class="num">05</span><span data-l="en">Projects &amp; Code</span><span data-l="ko">프로젝트 · 코드</span></h2>
+  <!-- 05 수상 -->
+  <section class="sec" id="awards" aria-labelledby="award-t">
+    <h2 id="award-t"><span class="num">05</span><span data-l="en">Honors &amp; Awards</span><span data-l="ko">수상</span></h2>
     <div class="sec-body">
-      <div class="cards">
-        <article class="card">
-          <h3>Practice01</h3>
-          <p><span data-l="en">Coursework repository for a big data analysis class — weekly exercises linking GitHub and Google Colab.</span><span data-l="ko">빅데이터 분석 수업 실습 저장소입니다. GitHub와 Google Colab을 연결해 주차별 실습을 정리합니다.</span></p>
-          <ul class="tags"><li>Colab</li><li><span data-l="en">Data analysis</span><span data-l="ko">데이터 분석</span></li></ul>
-          <a class="more" href="https://github.com/dana4832/Practice01">GitHub →</a>
-        </article>
-        <article class="card">
-          <h3>badminton-watch</h3>
-          <p><span data-l="en">A small bot that checks a public sports-center booking page every five minutes and sends a Telegram alert when registration opens.</span><span data-l="ko">공공체육시설 예약 페이지를 5분마다 확인해 접수가 열리면 텔레그램으로 알려주는 작은 봇입니다.</span></p>
-          <ul class="tags"><li>Python</li><li>GitHub Actions</li><li>Telegram</li></ul>
-          <a class="more" href="https://github.com/dana4832/badminton-watch">GitHub →</a>
-        </article>
-      </div>
+      <article class="entry">
+        <p class="when">2026.08.20</p>
+        <div>
+          <h3>Best Presentation Award</h3>
+          <p class="where">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2026.05.22</p>
+        <div>
+          <h3><span data-l="en">Best Paper Award</span><span data-l="ko">최우수논문상</span></h3>
+          <p class="where"><span data-l="en">Urban Health Society of Korea (도시건강학회)</span><span data-l="ko">도시건강학회</span></p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2025.08.21</p>
+        <div>
+          <h3>Best Presentation Award</h3>
+          <p class="where">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2025.04.25</p>
+        <div>
+          <h3><span data-l="en">Outstanding Paper Award (presenter)</span><span data-l="ko">우수논문상 (발표자)</span></h3>
+          <p class="where"><span data-l="en">Korea Planning Association, Spring Industry–Academia Conference</span><span data-l="ko">대한국토·도시계획학회 춘계산학학술대회</span></p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2024.10.12</p>
+        <div>
+          <h3><span data-l="en">Outstanding Paper Award</span><span data-l="ko">우수논문상</span></h3>
+          <p class="where"><span data-l="en">Urban Design Institute of Korea, Fall Conference</span><span data-l="ko">한국도시설계학회 추계학술대회</span></p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2024.08.23</p>
+        <div>
+          <h3>Best Paper Award</h3>
+          <p class="where">International Conference of Asia-Pacific Planning Societies (ICAPPS)</p>
+        </div>
+      </article>
+      <article class="entry">
+        <p class="when">2024.04.20</p>
+        <div>
+          <h3><span data-l="en">Outstanding Paper Award (presenter)</span><span data-l="ko">우수논문상 (발표자)</span></h3>
+          <p class="where"><span data-l="en">Urban Design Institute of Korea, Spring Conference</span><span data-l="ko">한국도시설계학회 춘계학술대회</span></p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -257,7 +354,6 @@
       <dl class="skills">
         <dt><span data-l="en">Simulation</span><span data-l="ko">시뮬레이션</span></dt><dd>ANSYS Fluent (CFD)</dd>
         <dt>GIS</dt><dd>ArcGIS, QGIS</dd>
-        <dt><span data-l="en">Programming</span><span data-l="ko">프로그래밍</span></dt><dd>Python</dd>
       </dl>
       <p class="subhead"><span data-l="en">Certifications</span><span data-l="ko">자격증</span></p>
       <article class="entry">
@@ -273,7 +369,7 @@
 
 <footer>
   <div class="wrap foot">
-    <p>© <span id="year">2026</span> Daeun Lee · <a href="https://github.com/dana4832">github.com/dana4832</a></p>
+    <p>© <span id="year">2026</span> <span data-l="en">Daeun Lee</span><span data-l="ko">이다은</span> · <a href="https://github.com/dana4832">github.com/dana4832</a></p>
     <p><a href="#home"><span data-l="en">Back to top ↑</span><span data-l="ko">맨 위로 ↑</span></a></p>
   </div>
 </footer>
