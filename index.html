@@ -70,60 +70,11 @@
     </div>
   </div>
 
-  <!-- 도시 + 식물 일러스트 (장식용) -->
-  <svg class="skyline" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-    <defs>
-      <pattern id="win" width="14" height="18" patternUnits="userSpaceOnUse"><rect class="s-win" x="4" y="6" width="6" height="8" rx="1"/></pattern>
-      <g id="tree-r"><path class="s-line" d="M0 0V-22M0-16l7-8M0-21l-6-7"/><circle class="s-leaf" cy="-33" r="14"/></g>
-      <g id="tree-l"><path class="s-line" d="M0 0V-16"/><path class="s-moss" d="M0-60C17-43 15-21 0-12C-15-21-17-43 0-60Z"/><path class="s-vein" d="M0-16V-48M0-26l7-8M0-34l-7-8"/></g>
-      <g id="bush"><path class="s-leaf" d="M-17 0a9 9 0 0 1 5-15a10 10 0 0 1 19-2a9 9 0 0 1 9 17Z"/></g>
-    </defs>
-
-    <path class="s-hill" d="M0 198C120 198 170 150 300 158S520 120 660 140S900 110 1010 138S1130 198 1200 198Z"/>
-    <circle class="s-sun" cx="1010" cy="40" r="16"/>
-
-    <!-- 건물 -->
-    <g>
-      <rect class="s-bld" x="84" y="108" width="70" height="90"/><rect fill="url(#win)" x="84" y="108" width="70" height="90"/>
-      <rect class="s-bld" x="168" y="72" width="56" height="126"/><rect fill="url(#win)" x="168" y="72" width="56" height="126"/>
-      <rect class="s-bld" x="252" y="126" width="84" height="72"/><rect fill="url(#win)" x="252" y="126" width="84" height="72"/>
-      <rect class="s-bld" x="434" y="36" width="42" height="18"/>
-      <rect class="s-bld" x="420" y="54" width="70" height="144"/><rect fill="url(#win)" x="420" y="54" width="70" height="144"/>
-      <rect class="s-bld" x="504" y="108" width="84" height="90"/><rect fill="url(#win)" x="504" y="108" width="84" height="90"/>
-      <rect class="s-bld" x="644" y="90" width="56" height="108"/><rect fill="url(#win)" x="644" y="90" width="56" height="108"/>
-      <rect class="s-bld" x="714" y="144" width="98" height="54"/><rect fill="url(#win)" x="714" y="144" width="98" height="54"/>
-      <rect class="s-bld" x="882" y="54" width="56" height="144"/><rect fill="url(#win)" x="882" y="54" width="56" height="144"/>
-      <rect class="s-bld" x="952" y="108" width="84" height="90"/><rect fill="url(#win)" x="952" y="108" width="84" height="90"/>
-      <rect class="s-bld" x="1078" y="126" width="70" height="72"/><rect fill="url(#win)" x="1078" y="126" width="70" height="72"/>
-    </g>
-
-    <!-- 옥상 정원 · 벽면 녹화 -->
-    <use href="#tree-r" transform="translate(272 126) scale(.55)"/>
-    <use href="#bush" transform="translate(302 126) scale(.7)"/>
-    <use href="#bush" transform="translate(528 108) scale(.7)"/>
-    <use href="#tree-l" transform="translate(562 108) scale(.5)"/>
-    <use href="#tree-r" transform="translate(736 144) scale(.55)"/>
-    <use href="#tree-l" transform="translate(764 144) scale(.5)"/>
-    <use href="#bush" transform="translate(792 144) scale(.65)"/>
-    <use href="#bush" transform="translate(1112 126) scale(.7)"/>
-    <path class="s-vine" d="M652 90c7 12-7 22 0 34s-7 22 0 34M690 90c-6 10 6 18 0 28"/>
-    <path class="s-vine" d="M890 54c7 12-7 22 0 34s-7 22 0 34s-7 20 0 30"/>
-
-    <!-- 가로수 -->
-    <use href="#tree-l" transform="translate(34 198)"/>
-    <use href="#bush" transform="translate(64 198)"/>
-    <use href="#tree-r" transform="translate(238 198) scale(.9)"/>
-    <use href="#tree-l" transform="translate(362 198) scale(1.15)"/>
-    <use href="#tree-r" transform="translate(396 198)"/>
-    <use href="#tree-r" transform="translate(604 198) scale(.85)"/>
-    <use href="#tree-l" transform="translate(626 198) scale(.9)"/>
-    <use href="#bush" transform="translate(690 198) scale(.8)"/>
-    <use href="#tree-l" transform="translate(836 198) scale(1.1)"/>
-    <use href="#tree-r" transform="translate(862 198) scale(.8)"/>
-    <use href="#tree-r" transform="translate(1056 198)"/>
-    <use href="#tree-l" transform="translate(1166 198)"/>
-    <use href="#bush" transform="translate(1188 198)"/>
-  </svg>
+  <!-- 첫 화면 사진. 사진: Colin OBrien / Unsplash (Boston Common). 바꾸려면 assets/hero.jpg, assets/hero-1200.jpg 를 교체하세요 -->
+  <figure class="hero-photo">
+    <img src="assets/hero-1200.jpg" srcset="assets/hero-1200.jpg 1200w, assets/hero.jpg 2400w" sizes="100vw" width="2400" height="1200" alt="City skyline rising behind a green park" decoding="async" fetchpriority="high">
+    <figcaption>Photo: <a href="https://unsplash.com/photos/h-YtchBMMWk">Colin OBrien</a> / Unsplash</figcaption>
+  </figure>
 </section>
 
 <main class="wrap">
