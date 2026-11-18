@@ -232,6 +232,12 @@ h1, h2, h3, p { margin: 0; }
 }
 .num { font: 600 13px var(--sans); letter-spacing: 0.12em; color: var(--leaf); }
 .sec-note { color: var(--muted); max-width: 640px; margin: -8px 0 24px; }
+.journey-link {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 30px 0 0; padding: 16px 20px;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--muted);
+}
+.journey-link .journey-text { flex: 1 1 300px; }
+.journey-link .btn { flex: none; }
 .sec-body { max-width: 760px; }
 .sec-body p + p { margin-top: 14px; }
 .subhead { margin-top: 30px; font-weight: 650; }
