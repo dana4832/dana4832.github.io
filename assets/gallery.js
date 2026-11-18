@@ -1,3 +1,21 @@
+// 발표 사진 페이지(talks.html)의 동작
+
+// 언어·화면 모드 버튼을 켜고, 보고 있는 연도를 메뉴에서 강조합니다.
+(function () {
+  window.Site.init();
+  var links = [].slice.call(document.querySelectorAll('#nav-links a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      links.forEach(function (link) {
+        link.classList.toggle('on', link.hash === '#' + entry.target.id);
+      });
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  [].slice.call(document.querySelectorAll('main section[id]')).forEach(function (s) { observer.observe(s); });
+})();
+
 // 사진을 누르면 크게 보여 줍니다. (.shots 안의 사진에 적용)
 (function () {
   var root = document.documentElement;

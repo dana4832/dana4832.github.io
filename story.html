@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- 연구 스토리 페이지. story.html?id=pm-cfd 처럼 엽니다. 내용은 assets/stories.js 에서 고칩니다. -->
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Daeun Lee — Research story</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Serif+KR:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    (function () {
+      var r = document.documentElement;
+      try {
+        var l = localStorage.getItem('cv-lang');
+        if (l === 'ko' || l === 'en') { r.setAttribute('data-lang', l); r.lang = l; }
+        var th = localStorage.getItem('cv-theme');
+        if (th === 'dark' || th === 'light') r.setAttribute('data-theme', th);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<header class="top">
+  <nav class="wrap" aria-label="Main navigation">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1c5.5 4.5 5.5 11 0 15c-5.5-4-5.5-10.500 0-15Z"/><path d="M9.300 12h1.400v7H9.300z"/></svg>
+      <span>Daeun Lee</span>
+    </a>
+    <a class="back" href="index.html#research" aria-label="Back to portfolio">←<span class="back-label"> <span data-l="en">Back to portfolio</span><span data-l="ko">포트폴리오로</span></span></a>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="ko" aria-pressed="false">한국어</button>
+      </div>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Toggle light / dark">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.200" fill="none" stroke="currentColor" stroke-width="1.600"/><path d="M10 2.800a7.200 7.200 0 0 1 0 14.400Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap" id="story"></main>
+
+<footer>
+  <div class="wrap foot">
+    <p>© <span data-year>2026</span> Daeun Lee</p>
+    <p><a href="index.html"><span data-l="en">Back to portfolio</span><span data-l="ko">포트폴리오로 돌아가기</span></a></p>
+  </div>
+</footer>
+
+<noscript><p class="wrap noscript">This page needs JavaScript.</p></noscript>
+
+<script src="assets/data.js"></script>
+<script src="assets/stories.js"></script>
+<script src="assets/common.js"></script>
+<script src="assets/story.js"></script>
+</body>
+</html>
