@@ -32,6 +32,7 @@
             <canvas role="img" aria-label="Schematic animation"></canvas>
             <div class="ov ov-stat"><b></b><span></span><small></small></div>
             <figure class="ov ov-image"><img alt=""></figure>
+            <div class="ov ov-bars"><p class="bars-title"></p><div class="bars-rows"></div><small></small></div>
           </div>
           <div class="stage-foot">
             <p class="stage-cap"></p>
@@ -58,7 +59,7 @@
         <a class="btn primary" href="${esc(story.paper.url)}" target="_blank" rel="noopener">${t({ en: 'Read the paper →', ko: '논문 읽기 →' })}</a>
         <a class="btn" href="index.html#research">${t({ en: 'Back to portfolio', ko: '포트폴리오로 돌아가기' })}</a>
       </div>
-      <p class="disclaimer">${t({
+      <p class="disclaimer">${t(story.disclaimer || {
         en: 'The animations are schematic illustrations made for this page, not simulation output. See the paper for the actual results and figures.',
         ko: '이 페이지의 애니메이션은 이해를 돕기 위해 만든 개념도이며 실제 시뮬레이션 결과가 아닙니다. 실제 결과와 그림은 논문을 참고해 주세요.'
       })}</p>
@@ -66,7 +67,7 @@
 
   const stageEl = el.querySelector('.stage');
   const canvas = el.querySelector('canvas');
-  const ovStat = el.querySelector('.ov-stat'), ovImage = el.querySelector('.ov-image');
+  const ovStat = el.querySelector('.ov-stat'), ovImage = el.querySelector('.ov-image'), ovBars = el.querySelector('.ov-bars');
   const capEl = el.querySelector('.stage-cap'), badge = el.querySelector('.stage-badge');
   const steps = Array.from(el.querySelectorAll('.step'));
   const dots = Array.from(el.querySelectorAll('.dots button'));
@@ -78,9 +79,11 @@
      ============================================================ */
   const stage = (function () {
     const ctx = canvas.getContext('2d');
-    const D = { layout: 0, hIn: 1, hRing: 1, mesh: 0, focus: 0, section: 0, ar: 1, wind: 0.3, art: 0, corridor: 0, lift: 0 };
+    const D = { layout: 0, hIn: 1, hRing: 1, mesh: 0, focus: 0, section: 0, ar: 1, wind: 0.3, art: 0, corridor: 0, lift: 0,
+      park: 0, cover: 1, pAccess: 0, pSocial: 0, pGaps: 0, pImprove: 0, pProgram: 0 };
     const cur = Object.assign({}, D), tgt = Object.assign({}, D);
     const parts = [], cparts = [];
+    let inited = false;
     const lerp = (a, b, k) => a + (b - a) * k;
     const rnd = (a, b) => a + Math.random() * (b - a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -233,7 +236,7 @@
       ctx.fillText(label, X(1), y0);
       const x0 = X(1) + ctx.measureText(label).width + 10;
       const drift = reduce ? 0 : (tick * (0.4 + cur.wind * 1.6)) % 14;
-      ctx.globalAlpha = 0.9;
+      ctx.globalAlpha *= 0.9;
       arrow(x0 + drift * 0.3, y0 - 5, x0 + len + drift * 0.3);
       arrow(x0 + 8 - drift * 0.2, y0 + 5, x0 + 8 + len * 0.8);
       ctx.restore();
@@ -376,19 +379,243 @@
       ctx.restore();
     }
 
+    /* ----- 공원: 아파트 단지 사이를 지나는 선형공원 개념도 (도로를 덮어 만든 공원) -----
+       road: true = 공원이 생기기 전의 도로. access / social / gaps / improve / program 으로 장면을 바꿉니다.
+       실제 지도가 아니라 논문의 내용을 설명하기 위한 그림입니다. */
+    const PK = { top: 42, bot: 58, st: 36, sb: 64, lanes: [22.25, 40.75, 59.25, 77.75], gap: [58, 66], plaza: [62, 53.4] };
+    const pathY = x => 47.6 + 1.2 * Math.sin(x / 9);
+    const benchY = x => pathY(x) + 2.6;
+    const pkSlabs = [];
+    [10, 24, 68, 82].forEach(y => [7, 25.5, 44, 62.5, 81].forEach(x => pkSlabs.push({ x: x, y: y, w: 12, h: 6.5 })));
+    // 출입구 (s: -1 위쪽 단지, 1 아래쪽 단지 · add: 개선안에서 새로 생기는 곳)
+    const pkGates = [{ x: 14, s: -1 }, { x: 86, s: -1 }, { x: 44, s: 1 },
+      { x: 38, s: -1, add: true }, { x: 62, s: -1, add: true }, { x: 20, s: 1, add: true }, { x: 80, s: 1, add: true }];
+    const pkBenches = [{ x: 18 }, { x: 49 }, { x: 74 }, { x: 9, add: true }, { x: 30, add: true }, { x: 56, add: true }, { x: 90, add: true }];
+    const pkTrees = [];
+    [[10, 55], [27, 44.1], [36, 55.2], [52, 44], [70, 44.2], [90, 55]].forEach(q => pkTrees.push({ x: q[0], y: q[1], r: 1.25 }));
+    for (let x = 5.5, n = 0; x < 95; x += 4.6, n++) {
+      const up = n % 2 === 0, y = up ? 44.2 : 55.4;
+      if (pkGates.some(g => (g.s < 0) === up && Math.abs(g.x - x) < 2.6)) continue;
+      if (!up && Math.abs(x - PK.plaza[0]) < 5) continue;                 // 프로그램 마당 자리
+      if (pkTrees.some(q => !q.add && Math.hypot(q.x - x, q.y - y) < 3.4)) continue;
+      pkTrees.push({ x: x, y: y, r: 2.1 + (n % 3) * 0.25, add: true });
+    }
+    const pkHomers = [], pkWalkers = [], pkCars = [], pkDust = [], pkSit = [], pkRing = [];
+    // 집에서 가장 가까운 출입구까지의 길
+    function reroute(h) {
+      const gates = pkGates.filter(g => g.s === h.s && (!g.add || tgt.pImprove > 0.5));
+      const g = gates.reduce((a, b) => Math.abs(b.x - h.lx) < Math.abs(a.x - h.lx) ? b : a);
+      const ys = h.s < 0 ? PK.st : PK.sb;
+      h.pts = [[h.lx, h.hy], [h.lx, ys], [g.x, ys], [g.x, pathY(g.x)]];
+      h.len = Math.abs(h.hy - ys) + Math.abs(g.x - h.lx) + Math.abs(pathY(g.x) - ys);
+      h.d = Math.min(h.d, h.len);
+    }
+    function homerPos(h) {
+      let d = h.d;
+      for (let k = 0; k < 3; k++) {
+        const a = h.pts[k], b = h.pts[k + 1], l = Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1]);
+        if (d <= l || k === 2) { const q = l ? Math.min(1, d / l) : 0; return [a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q]; }
+        d -= l;
+      }
+    }
+    function spawnD(p, anywhere) {
+      const up = Math.random() < 0.5;
+      p.x = rnd(5, 95); p.y = up ? PK.top : PK.bot; p.vy = (up ? -1 : 1) * rnd(0.04, 0.11);
+      p.max = rnd(120, 260); p.life = anywhere ? rnd(10, p.max) : p.max;
+    }
+    for (let i = 0; i < 10; i++) {
+      const s = i % 2 ? 1 : -1, h = { s: s, lx: PK.lanes[(i >> 1) % 4], hy: s < 0 ? rnd(9, 30) : rnd(70, 91), d: rnd(0, 20), dir: Math.random() < 0.5 ? 1 : -1, sp: rnd(0.09, 0.14) };
+      reroute(h); pkHomers.push(h);
+    }
+    for (let i = 0; i < 14; i++) {
+      const seg = i < 9 ? [6, PK.gap[0]] : [PK.gap[1], 94];
+      pkWalkers.push({ seg: seg, x: rnd(seg[0], seg[1]), dir: Math.random() < 0.5 ? 1 : -1, sp: rnd(0.07, 0.12), off: rnd(-0.5, 0.5) });
+    }
+    for (let i = 0; i < 12; i++) pkCars.push({ lane: i % 4, x: rnd(0, 100), sp: rnd(0.5, 0.8) });
+    for (let i = 0; i < 30; i++) { const p = {}; spawnD(p, true); pkDust.push(p); }
+    pkBenches.filter(b => !b.add).forEach((b, k) => {
+      for (let n = 0; n < 2 + (k % 2); n++) pkSit.push({ x: b.x + (n - 0.5 - (k % 2) * 0.5) * 1.7, y: benchY(b.x) + (n % 2 ? 1.5 : -0.1), bx: b.x });
+    });
+    for (let n = 0; n < 7; n++) pkRing.push(n / 7 * 6.283);
+
+    function stepPark() {
+      pkCars.forEach(c => {
+        c.x += (c.lane < 2 ? 1 : -1) * c.sp;
+        if (c.x > 104) c.x = -4; else if (c.x < -4) c.x = 104;
+      });
+      pkDust.forEach(p => { p.y += p.vy; p.x += rnd(-0.08, 0.08); if (--p.life <= 0) spawnD(p); });
+      const joined = cur.pImprove > 0.5;
+      pkWalkers.forEach(w => {
+        const lo = joined ? 6 : w.seg[0], hi = joined ? 94 : w.seg[1];
+        w.x += w.dir * w.sp;
+        if (w.x > hi) w.dir = -1; else if (w.x < lo) w.dir = 1;
+      });
+      pkHomers.forEach(h => {
+        h.d += h.dir * h.sp;
+        if (h.d >= h.len) { h.d = h.len; h.dir = -1; }
+        else if (h.d <= 0) { h.d = 0; h.dir = 1; reroute(h); }
+      });
+    }
+
+    function drawPark(alpha) {
+      const font = getComputedStyle(document.body).fontFamily, ko = S.lang() === 'ko';
+      const c = cur.cover, im = cur.pImprove, fs = Math.max(11, U(2.7));
+      const dot = (x, y, r) => { ctx.beginPath(); ctx.arc(X(x), Y(y), U(r), 0, 6.283); ctx.fill(); };
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      rr(X(1), Y(1), U(98), U(98), U(3));
+      ctx.fillStyle = col.surface; ctx.fill();
+      ctx.strokeStyle = col.line; ctx.lineWidth = 1; ctx.stroke();
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      // 단지 안 길
+      ctx.strokeStyle = col.line; ctx.lineWidth = U(1.5);
+      ctx.beginPath();
+      [PK.st, PK.sb].forEach(y => { ctx.moveTo(X(4), Y(y)); ctx.lineTo(X(96), Y(y)); });
+      PK.lanes.forEach(x => { ctx.moveTo(X(x), Y(7)); ctx.lineTo(X(x), Y(PK.st)); ctx.moveTo(X(x), Y(PK.sb)); ctx.lineTo(X(x), Y(93)); });
+      ctx.stroke();
+      // 아파트
+      pkSlabs.forEach(b => {
+        const e = 1.6;
+        ctx.globalAlpha = alpha * 0.55; ctx.fillStyle = col.muted; ctx.fillRect(X(b.x), Y(b.y + b.h - e), U(b.w), U(e));
+        ctx.globalAlpha = alpha; ctx.fillStyle = col.surface; ctx.fillRect(X(b.x), Y(b.y - e), U(b.w), U(b.h));
+        ctx.globalAlpha = alpha * 0.7; ctx.fillStyle = col.line; ctx.fillRect(X(b.x), Y(b.y - e), U(b.w), U(b.h));
+        ctx.globalAlpha = alpha * 0.55; ctx.strokeStyle = col.muted; ctx.lineWidth = 1; ctx.strokeRect(X(b.x), Y(b.y - e), U(b.w), U(b.h));
+      });
+      const bx = 3, bw = 94, bh = PK.bot - PK.top;
+      // 공원이 생기기 전: 도시고속화도로
+      if (c < 0.98) {
+        const a = alpha * (1 - c);
+        ctx.globalAlpha = a * 0.85; ctx.fillStyle = col.muted;
+        rr(X(bx), Y(PK.top), U(bw), U(bh), U(1)); ctx.fill();
+        ctx.globalAlpha = a; ctx.strokeStyle = col.surface; ctx.lineWidth = U(0.35);
+        ctx.beginPath(); ctx.moveTo(X(bx + 1), Y(50)); ctx.lineTo(X(bx + bw - 1), Y(50)); ctx.stroke();
+        ctx.setLineDash([U(2.4), U(2.4)]);
+        ctx.beginPath(); [46.4, 53.6].forEach(y => { ctx.moveTo(X(bx + 1), Y(y)); ctx.lineTo(X(bx + bw - 1), Y(y)); }); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = col.surface;
+        pkCars.forEach(k => {
+          if (k.x < bx + 1 || k.x > bx + bw - 4.4) return;
+          rr(X(k.x), Y([43.7, 47.3, 50.9, 54.5][k.lane]), U(3.4), U(1.7), U(0.5)); ctx.fill();
+        });
+        ctx.fillStyle = col.dust;
+        pkDust.forEach(p => {
+          ctx.globalAlpha = a * clamp(Math.min(p.life / 40, (p.max - p.life) / 20), 0, 1) * 0.8;
+          dot(p.x, p.y, 0.6);
+        });
+      }
+      // 공원
+      if (c > 0.02) {
+        const a = alpha * c;
+        ctx.globalAlpha = a; ctx.fillStyle = col.mint;
+        rr(X(bx), Y(PK.top), U(bw), U(bh), U(2)); ctx.fill();
+        ctx.globalAlpha = a * 0.24; ctx.fillStyle = col.leaf; ctx.fill();
+        ctx.globalAlpha = a * 0.5; ctx.strokeStyle = col.leaf; ctx.lineWidth = 1; ctx.stroke();
+        // 출입구와 산책로
+        ctx.lineWidth = U(1.4);
+        pkGates.forEach(g => {
+          const v = g.add ? im : 1;
+          if (v < 0.02) return;
+          ctx.globalAlpha = a * (g.add ? v * 0.95 : 0.34); ctx.strokeStyle = g.add ? col.tc : col.ink;
+          ctx.beginPath(); ctx.moveTo(X(g.x), Y(g.s < 0 ? PK.st : PK.sb)); ctx.lineTo(X(g.x), Y(pathY(g.x))); ctx.stroke();
+        });
+        const line = (x0, x1) => { ctx.beginPath(); for (let x = x0; x <= x1; x += 1) ctx.lineTo(X(x), Y(pathY(x))); ctx.stroke(); };
+        ctx.globalAlpha = a * 0.34; ctx.strokeStyle = col.ink;
+        line(6, PK.gap[0]); line(PK.gap[1], 94);
+        if (im > 0.02) { ctx.globalAlpha = a * im * 0.95; ctx.strokeStyle = col.tc; line(PK.gap[0], PK.gap[1]); }
+        // 프로그램 마당
+        if (cur.pProgram > 0.02) {
+          const pp = cur.pProgram, beat = reduce ? 0 : Math.sin(tick * 0.08) * 0.35;
+          ctx.globalAlpha = a * pp * 0.7; ctx.fillStyle = col.surface; dot(PK.plaza[0], PK.plaza[1], 3.5);
+          ctx.globalAlpha = a * pp; ctx.strokeStyle = col.tc; ctx.lineWidth = 1.2; ctx.stroke();
+          ctx.fillStyle = col.tc;
+          pkRing.forEach(t => dot(PK.plaza[0] + Math.cos(t) * (2.5 + beat), PK.plaza[1] + Math.sin(t) * (2.5 + beat), 0.7));
+          dot(PK.plaza[0], PK.plaza[1], 0.8);
+        }
+        // 나무 (add: 그늘을 만드는 큰 나무)
+        pkTrees.forEach(q => {
+          const v = q.add ? im : 1;
+          if (v < 0.02) return;
+          ctx.globalAlpha = a * (q.add ? 0.62 : 0.8); ctx.fillStyle = col.leaf; dot(q.x, q.y, q.r * v);
+          if (q.add) { ctx.globalAlpha = a * v * 0.9; ctx.strokeStyle = col.tc; ctx.lineWidth = 1.1; ctx.stroke(); }
+        });
+        // 벤치
+        pkBenches.forEach(b => {
+          const v = b.add ? im : 1;
+          if (v < 0.02) return;
+          ctx.globalAlpha = a * v * (b.add ? 1 : 0.6); ctx.fillStyle = b.add ? col.tc : col.ink;
+          rr(X(b.x - 1.3), Y(benchY(b.x) - 0.45), U(2.6), U(0.9), U(0.3)); ctx.fill();
+        });
+        // 집에서 공원까지 걷는 길
+        if (cur.pAccess > 0.02) {
+          ctx.globalAlpha = a * cur.pAccess * 0.5; ctx.strokeStyle = col.tc; ctx.lineWidth = 1.4;
+          ctx.setLineDash([U(1.4), U(1.4)]); ctx.lineDashOffset = reduce ? 0 : -tick * 0.3;
+          pkHomers.forEach(h => { ctx.beginPath(); h.pts.forEach(q => ctx.lineTo(X(q[0]), Y(q[1]))); ctx.stroke(); });
+          ctx.setLineDash([]);
+        }
+        // 사람
+        ctx.globalAlpha = a * 0.72; ctx.fillStyle = col.ink;
+        pkWalkers.forEach(w => dot(w.x, pathY(w.x) + w.off, 0.8));
+        pkHomers.forEach(h => {
+          const q = homerPos(h), hi = cur.pAccess > 0.5;
+          ctx.globalAlpha = a * (hi ? 1 : 0.72); ctx.fillStyle = hi ? col.tc : col.ink;
+          dot(q[0], q[1], hi ? 1 : 0.8);
+        });
+        if (cur.pSocial > 0.02) {
+          const ps = cur.pSocial, pulse = reduce ? 0 : Math.sin(tick * 0.05) * 0.3;
+          ctx.fillStyle = col.tc;
+          pkBenches.filter(b => !b.add).forEach(b => { ctx.globalAlpha = a * ps * 0.16; dot(b.x, benchY(b.x) + 0.7, 3.3 + pulse); });
+          ctx.globalAlpha = a * ps;
+          pkSit.forEach(q => dot(q.x, q.y, 0.85));
+        }
+        // 불편한 곳 표시
+        const gp = cur.pGaps * (1 - im);
+        if (gp > 0.02) {
+          ctx.globalAlpha = a * gp; ctx.strokeStyle = col.tc; ctx.fillStyle = col.tc; ctx.lineWidth = 1.5;
+          ctx.setLineDash([4, 4]);
+          pkGates.filter(g => g.add).forEach(g => { ctx.beginPath(); ctx.arc(X(g.x), Y(g.s < 0 ? PK.top : PK.bot), U(2.2), 0, 6.283); ctx.stroke(); });
+          const gx = (PK.gap[0] + PK.gap[1]) / 2;
+          ctx.beginPath(); ctx.ellipse(X(gx), Y(pathY(gx)), U(5), U(2.4), 0, 0, 6.283); ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.font = '600 ' + fs + 'px ' + font; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+          ctx.fillText(ko ? '출입구 없음' : 'No entrance', X(41), Y(39.6));
+          ctx.textAlign = 'center';
+          ctx.fillText(ko ? '끊긴 산책로' : 'Path breaks off', X(gx), Y(52.4));
+          ctx.fillText(ko ? '그늘 · 벤치 부족' : 'Little shade, few benches', X(27), Y(52.6));
+        }
+      }
+      // 이름표
+      ctx.font = '600 ' + fs + 'px ' + font; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+      [[ko ? '도시고속화도로' : 'Urban expressway', 1 - c], [ko ? '굿모닝파크' : 'Good Morning Park', c]].forEach(q => {
+        if (q[1] < 0.02) return;
+        const w = ctx.measureText(q[0]).width;
+        ctx.globalAlpha = alpha * q[1] * 0.9; ctx.fillStyle = col.surface;
+        rr(X(4.5) - 5, Y(60.9) - fs * 0.75, w + 10, fs * 1.5, 5); ctx.fill();
+        ctx.globalAlpha = alpha * q[1]; ctx.fillStyle = col.muted;
+        ctx.fillText(q[0], X(4.5), Y(60.9));
+      });
+      ctx.restore();
+    }
+
     function draw() {
       if (!W) return;
       ctx.clearRect(0, 0, W, H);
-      const R = rects();
-      if (cur.section < 0.98) drawBlock(R, 1 - cur.section);
-      if (cur.section > 0.02) drawSection(cur.section);
-      drawWind();
+      const air = 1 - cur.park;
+      if (air > 0.02) {
+        const R = rects();
+        if (cur.section < 0.98) drawBlock(R, (1 - cur.section) * air);
+        if (cur.section > 0.02) drawSection(cur.section * air);
+        ctx.save(); ctx.globalAlpha = air; drawWind(); ctx.restore();
+      }
+      if (cur.park > 0.02) drawPark(cur.park);
     }
 
     function advance() {
       for (const k in cur) cur[k] += (tgt[k] - cur[k]) * 0.07;
-      if (cur.section < 0.98) stepBlock(rects());
-      if (cur.section > 0.02) stepSection();
+      if (cur.park < 0.98) {
+        if (cur.section < 0.98) stepBlock(rects());
+        if (cur.section > 0.02) stepSection();
+      }
+      if (cur.park > 0.02) stepPark();
       tick++;
     }
     function loop() {
@@ -412,12 +639,22 @@
         wind: s.wind === 'high' ? 1 : 0.3,
         art: s.emit === 'arterial' ? 1 : 0,
         corridor: s.corridor ? 1 : 0,
-        lift: s.lift ? 1 : 0
+        lift: s.lift ? 1 : 0,
+        park: s.view === 'park' ? 1 : 0,
+        cover: s.road ? 0 : 1,
+        pAccess: s.access ? 1 : 0,
+        pSocial: s.social ? 1 : 0,
+        pGaps: s.gaps ? 1 : 0,
+        pImprove: s.improve ? 1 : 0,
+        pProgram: s.program ? 1 : 0
       });
+      // 첫 장면은 바로 그 상태에서 시작합니다 (다른 종류의 그림에서 넘어오는 것처럼 보이지 않게)
+      if (!inited) { inited = true; Object.assign(cur, tgt); }
       if (reduce) {
         // 움직임 줄이기 설정: 바로 최종 상태를 한 장면으로 보여줍니다
         Object.assign(cur, tgt);
         parts.forEach(p => spawn(p, true)); cparts.forEach(p => spawnC(p, true));
+        pkHomers.forEach(reroute);
         for (let n = 0; n < 160; n++) advance();
         draw();
       }
@@ -443,11 +680,24 @@
     steps.forEach((s, n) => s.classList.toggle('active', n === i));
     dots.forEach((d, n) => { if (n === i) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
     const scene = story.steps[i].scene || {};
-    const isStat = scene.view === 'stat', isImage = scene.view === 'image';
-    stageEl.classList.toggle('overlay', isStat || isImage);
+    const isStat = scene.view === 'stat', isImage = scene.view === 'image', isBars = scene.view === 'bars';
+    stageEl.classList.toggle('overlay', isStat || isImage || isBars);
     ovStat.classList.toggle('show', isStat);
     ovImage.classList.toggle('show', isImage);
+    ovBars.classList.remove('show');
     badge.hidden = isStat || isImage;
+    badge.innerHTML = isBars ? t({ en: 'Figures from the paper', ko: '논문의 수치' }) : t({ en: 'Schematic', ko: '개념도' });
+    if (isBars) {
+      // 막대그래프: rows 의 value 를 max 에 대한 비율로 그립니다. hi: true 인 줄만 주제 색으로 강조
+      ovBars.querySelector('.bars-title').innerHTML = t(scene.title);
+      ovBars.querySelector('.bars-rows').innerHTML = scene.rows.map(r =>
+        `<div class="bar-row${r.hi ? ' hi' : ''}"><span class="bar-label">${t(r.label)}</span>` +
+        `<span class="bar-track"><i style="--w:${(r.value / scene.max * 100).toFixed(1)}%"></i></span>` +
+        `<b>${esc(String(r.value))}${t(scene.unit)}</b></div>`).join('');
+      ovBars.querySelector('small').innerHTML = t(scene.note);
+      void ovBars.offsetWidth;
+      ovBars.classList.add('show');
+    }
     if (isStat) {
       ovStat.querySelector('b').textContent = scene.value;
       ovStat.querySelector('span').innerHTML = t(scene.label);
@@ -456,7 +706,7 @@
       const img = ovImage.querySelector('img');
       img.src = scene.src;
       img.alt = scene.alt ? scene.alt[S.lang()] || scene.alt.en || '' : '';
-    } else {
+    } else if (!isBars) {
       stage.set(scene);
     }
     capEl.innerHTML = t(scene.caption);
@@ -484,6 +734,9 @@
   }));
 
   S.init();
+  // 숫자·그래프 장면 뒤에 비치는 바탕 그림도 이 스토리의 그림으로 시작합니다
+  const firstDrawn = story.steps.find(s => s.scene && !/^(stat|image|bars)$/.test(s.scene.view || ''));
+  if (firstDrawn) stage.set(firstDrawn.scene);
   onScroll();
   stage.start();
 })();

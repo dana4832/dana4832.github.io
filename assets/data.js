@@ -66,7 +66,7 @@ window.CV = {
         en: 'Mixed-methods research on park use and neighborhood environments that support active, healthy aging.',
         ko: '고령자의 공원 이용 행태와 경험, 활동적 노화를 돕는 근린환경에 관한 혼합 방법 연구입니다.'
       },
-      story: null
+      story: 'park-aging'
     }
   ],
 
@@ -77,7 +77,8 @@ window.CV = {
       title: '고령자의 공원 이용 행태 및 경험 분석을 위한 혼합 방법 연구 — 성남시 판교(분당)의 신설 및 기존 공원을 중심으로',
       authors: { en: 'Kitae Park, Yesong Shin, Daeun Lee, Jeongwoo Lee', ko: '박기태, 신예송, 이다은, 이정우' },
       venue: { en: 'GRI Review (GRI연구논총) · in Korean', ko: 'GRI연구논총' },
-      doi: 'https://doi.org/10.23286/gri.2025.27.2.007'
+      doi: 'https://doi.org/10.23286/gri.2025.27.2.007',
+      story: 'park-aging'
     },
     {
       type: 'pub', date: '2025.03', topic: 'air',
